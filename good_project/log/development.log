@@ -32,3 +32,1288 @@ Migrating to CreateUsers (20221214214012)
   [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
   [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
   [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (10.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6058006232906588730)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20221214214012)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying NOT NULL, "email" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221214214012"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-12-15 01:27:41.177450"], ["updated_at", "2022-12-15 01:27:41.177450"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(6058006232906588730)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Yen"], ["email", "yenny0104@gmail.com"], ["created_at", "2022-12-15 01:28:02.555128"], ["updated_at", "2022-12-15 01:28:02.555128"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/users" for ::1 at 2022-12-14 20:55:28 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3:in `index'
+Completed 200 OK in 45ms (Views: 34.9ms | ActiveRecord: 9.0ms | Allocations: 6181)
+
+
+Started POST "/users/new" for ::1 at 2022-12-14 20:59:08 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/new"):
+  
+Started POST "/users" for ::1 at 2022-12-14 21:00:23 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 723)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:00:34 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 596)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:03:14 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:05:04 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 1168)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:05:05 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:05:06 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 596)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:05:23 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 1168)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:05:24 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:05:26 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:06:16 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 1168)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:06:17 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 2ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:06:17 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 3ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:06:18 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:06:18 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users" for ::1 at 2022-12-14 21:06:19 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:08:04 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:08:05 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:08:05 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:08:06 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:08:07 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz" for ::1 at 2022-12-14 21:08:41 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 1168)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz" for ::1 at 2022-12-14 21:08:42 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:09:16 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 1168)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:09:17 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:09:18 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 0ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name[Mlkz]=&email[Mamulashvili]=" for ::1 at 2022-12-14 21:13:05 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>{"Mlkz"=>""}, "email"=>{"Mamulashvili"=>""}}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name[Mlkz]=&email[Mamulashvili]=" for ::1 at 2022-12-14 21:13:06 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>{"Mlkz"=>""}, "email"=>{"Mamulashvili"=>""}}
+Completed 400 Bad Request in 2ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:13:28 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 2ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:13:29 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/user?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:14:50 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/user"):
+  
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:07 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 1168)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: users:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:08 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: users:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:09 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: users:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:09 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 2ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: users:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:16 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 1168)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:17 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 2ms (Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:55 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:56 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 0ms (Allocations: 593)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started GET "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:15:59 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3:in `index'
+Completed 200 OK in 36ms (Views: 34.8ms | ActiveRecord: 15.4ms | Allocations: 5457)
+
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:16:04 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:19:00 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 1175)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:19:01 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 595)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:19:02 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:19:08 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:19:09 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 594)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:21:17 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 684)
+
+
+
+ArgumentError - wrong number of arguments (given 2, expected 0..1):
+  app/controllers/users_controller.rb:15:in `create'
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:21:39 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:16:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mlkz"], ["email", "Mamulashvili"], ["created_at", "2022-12-15 02:21:39.532723"], ["updated_at", "2022-12-15 02:21:39.532723"]]
+  ↳ app/controllers/users_controller.rb:16:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:16:in `create'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 12.8ms | Allocations: 5795)
+
+
+Started POST "/users?name=Mlkz&email=Mamulashvili" for ::1 at 2022-12-14 21:29:24 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"Mamulashvili"}
+Completed 400 Bad Request in 1ms (Allocations: 1177)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:26:in `user_params'
+  app/controllers/users_controller.rb:16:in `create'
+
+Started POST "/users?name[name]=Mlkz&email[email]=Mamulashvili" for ::1 at 2022-12-14 21:31:36 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>{"name"=>"Mlkz"}, "email"=>{"email"=>"Mamulashvili"}}
+Completed 400 Bad Request in 2ms (Allocations: 601)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:26:in `user_params'
+  app/controllers/users_controller.rb:16:in `create'
+
+Started POST "/users?user[name]=Mlkz&user[email]=Mamulashvili" for ::1 at 2022-12-14 21:31:56 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"Mlkz", "email"=>"Mamulashvili"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:18:in `create'
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mlkz"], ["email", "Mamulashvili"], ["created_at", "2022-12-15 02:31:56.710420"], ["updated_at", "2022-12-15 02:31:56.710420"]]
+  ↳ app/controllers/users_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:18:in `create'
+Completed 200 OK in 33ms (Views: 0.5ms | ActiveRecord: 11.1ms | Allocations: 6557)
+
+
+Started POST "/users?user[name]=NIni&user[email]=Tsintsadze" for ::1 at 2022-12-14 21:37:14 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"NIni", "email"=>"Tsintsadze"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:18:in `create'
+  [1m[36mUser Create (2.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "NIni"], ["email", "Tsintsadze"], ["created_at", "2022-12-15 02:37:14.784610"], ["updated_at", "2022-12-15 02:37:14.784610"]]
+  ↳ app/controllers/users_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:18:in `create'
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 2.7ms | Allocations: 1937)
+
+
+Started GET "/users" for ::1 at 2022-12-15 00:09:24 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3:in `index'
+Completed 200 OK in 33ms (Views: 31.4ms | ActiveRecord: 14.2ms | Allocations: 3984)
+
+
+Started GET "/users" for ::1 at 2022-12-15 00:10:56 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:3:in `index'
+Completed 200 OK in 23ms (Views: 22.1ms | ActiveRecord: 0.7ms | Allocations: 1052)
+
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (2.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started POST "/users" for ::1 at 2022-12-15 00:26:43 -0500
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+Completed 400 Bad Request in 1ms (Allocations: 1177)
+
+
+
+ActionController::ParameterMissing - param is missing or the value is empty: user:
+  app/controllers/users_controller.rb:25:in `user_params'
+  app/controllers/users_controller.rb:15:in `create'
+
+Started GET "/users/2" for ::1 at 2022-12-15 00:29:00 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"2"}
+Completed 500 Internal Server Error in 4ms (Allocations: 3688)
+
+
+
+NameError - undefined local variable or method `param' for #<UsersController:0x00000000010310>
+    @user = User.find(param[:id])
+                      ^^^^^
+Did you mean?  params
+               params=:
+  app/controllers/users_controller.rb:11:in `show'
+
+Started GET "/users/2" for ::1 at 2022-12-15 00:29:11 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"2"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `show'
+Completed 404 Not Found in 33ms (ActiveRecord: 10.1ms | Allocations: 7812)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=2:
+  app/controllers/users_controller.rb:11:in `show'
+
+Started GET "/users/2/__better_errors" for ::1 at 2022-12-15 00:29:33 -0500
+Started GET "/users/2/__better_errors" for ::1 at 2022-12-15 00:29:43 -0500
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started GET "/users/3/__better_errors" for ::1 at 2022-12-15 00:30:07 -0500
+Started GET "/users/3/__better_errors" for ::1 at 2022-12-15 00:30:11 -0500
+Started GET "/users/3/__better_errors" for ::1 at 2022-12-15 00:30:12 -0500
+Started GET "/users/3/__better_errors" for ::1 at 2022-12-15 00:30:12 -0500
+Started GET "/users/3" for ::1 at 2022-12-15 00:30:24 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `show'
+No template found for UsersController#show, rendering head :no_content
+Completed 204 No Content in 3ms (ActiveRecord: 0.3ms | Allocations: 1849)
+
+
+Started GET "/users/3" for ::1 at 2022-12-15 00:32:44 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:11:in `show'
+Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 10.6ms | Allocations: 4059)
+
+
+Started PATCH "/users/3?name=Gio" for ::1 at 2022-12-15 00:40:51 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Gio", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 21ms (ActiveRecord: 8.5ms | Allocations: 6560)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:34:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio" for ::1 at 2022-12-15 00:41:12 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.3ms | Allocations: 585)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:34:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio" for ::1 at 2022-12-15 00:41:13 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 1.4ms | Allocations: 583)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:34:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio" for ::1 at 2022-12-15 00:41:13 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 1.0ms | Allocations: 584)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:34:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio" for ::1 at 2022-12-15 00:41:15 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.3ms | Allocations: 583)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:34:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio" for ::1 at 2022-12-15 00:41:17 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.3ms | Allocations: 583)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:34:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio" for ::1 at 2022-12-15 00:41:33 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 9.5ms | Allocations: 3912)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:35:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio/__better_errors" for ::1 at 2022-12-15 00:41:46 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio/__better_errors"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms | Allocations: 600)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:35:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio/__better_errors" for ::1 at 2022-12-15 00:42:28 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio/__better_errors"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 7.4ms | Allocations: 6901)
+
+
+
+NameError - undefined local variable or method `debug' for #<UsersController:0x00000000014cf8>
+      debug
+      ^^^^^
+Did you mean?  debugger:
+  app/controllers/users_controller.rb:34:in `update'
+
+Started PATCH "/users/3?name[Gio]=Gio/__better_errors" for ::1 at 2022-12-15 00:43:05 -0500
+
+Zeitwerk::NameError - expected file /Users/mlkz/Documents/code/aa_live/W6D3/good_project/app/controllers/users_controller.rb to define constant UsersController, but didn't
+      raise Zeitwerk::NameError.new("expected file #{file} to define constant #{cpath}, but didn't", cref.last)
+      ^^^^^:
+
+Started PATCH "/users/3?name[Gio]=Gio/__better_errors" for ::1 at 2022-12-15 00:43:20 -0500
+
+TypeError - superclass mismatch for class UsersCo:
+  app/controllers/users_controller.rb:2:in `<top (required)>'
+
+Started PATCH "/users/3?name[Gio]=Gio/__better_errors" for ::1 at 2022-12-15 00:43:34 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio/__better_errors"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+Completed   in 4039ms (ActiveRecord: 3.4ms | Allocations: 167364)
+
+
+Started PATCH "/users/3?name[Gio]=Gio/" for ::1 at 2022-12-15 00:43:52 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"Gio"=>"Gio/"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+Completed 500 Internal Server Error in 93597ms (ActiveRecord: 4.7ms | Allocations: 193157)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:36:in `update'
+
+Started PATCH "/users/3?name[name]=Gio/" for ::1 at 2022-12-15 00:45:28 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>{"name"=>"Gio/"}, "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+Completed 500 Internal Server Error in 41300ms (ActiveRecord: 0.3ms | Allocations: 121484)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:36:in `update'
+
+Started PATCH "/users/3?user[name]=Gio/" for ::1 at 2022-12-15 00:46:11 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"Gio/"}, "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+Completed 500 Internal Server Error in 20124ms (ActiveRecord: 0.3ms | Allocations: 126512)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:36:in `update'
+
+Started PATCH "/users/3?user[name]=Gio" for ::1 at 2022-12-15 00:46:56 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"Gio"}, "id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 3.9ms | Allocations: 3947)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:35:in `update'
+
+Started PATCH "/users/3?user[name]=Gio" for ::1 at 2022-12-15 00:47:49 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"Gio"}, "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 3.4ms | Allocations: 110577)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:36:in `update'
+
+Started PATCH "/users/3?user[name]=Gio" for ::1 at 2022-12-15 00:48:06 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"Gio"}, "id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+Completed 500 Internal Server Error in 47062ms (ActiveRecord: 4.4ms | Allocations: 201698)
+
+
+
+ArgumentError - wrong number of arguments (given 0, expected 1):
+  app/controllers/users_controller.rb:36:in `update'
+
+Started PATCH "/users/3?user[name]=Gio" for ::1 at 2022-12-15 00:48:58 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"Gio"}, "id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:36:in `update'
+  [1m[36mUser Update (1.2ms)[0m  [1m[33mUPDATE "users" SET "name" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["name", "Gio"], ["updated_at", "2022-12-15 05:48:58.358232"], ["id", 3]]
+  ↳ app/controllers/users_controller.rb:36:in `update'
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:36:in `update'
+Completed 200 OK in 33ms (Views: 0.3ms | ActiveRecord: 7.4ms | Allocations: 114152)
+
+
+Started POST "/users/3?user[name]=Gio" for ::1 at 2022-12-15 00:49:43 -0500
+  
+ActionController::RoutingError (No route matches [POST] "/users/3"):
+  
+Started GET "/users/3" for ::1 at 2022-12-15 00:49:55 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `show'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.6ms | Allocations: 837)
+
+
+Started GET "/users" for ::1 at 2022-12-15 00:50:01 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.3ms | Allocations: 1027)
+
+
+Started GET "/users" for ::1 at 2022-12-15 00:50:45 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.3ms | Allocations: 972)
+
+
+Started PATCH "/users?user[name]=Dato" for ::1 at 2022-12-15 00:51:49 -0500
+  
+ActionController::RoutingError (No route matches [PATCH] "/users"):
+  
+Started POST "/users?user[name]=Dato" for ::1 at 2022-12-15 00:52:29 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Dato"}}
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms | Allocations: 3457)
+
+
+
+NameError - undefined local variable or method `user' for #<UsersController:0x0000000000dd90>
+    if user.save
+       ^^^^
+Did you mean?  @user:
+  app/controllers/users_controller.rb:24:in `create'
+
+Started POST "/users?user[name]=Dato" for ::1 at 2022-12-15 00:52:54 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Dato"}}
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 3.8ms | Allocations: 6294)
+
+
+
+NameError - undefined local variable or method `user' for #<UsersController:0x0000000000e9e8>
+      render json: user.errors.full_messages, status: :unprocessable_entity
+                   ^^^^
+Did you mean?  @user:
+  app/controllers/users_controller.rb:27:in `create'
+
+Started POST "/users?user[name]=Dato" for ::1 at 2022-12-15 00:53:34 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Dato"}}
+Completed 422 Unprocessable Entity in 13ms (Views: 0.1ms | ActiveRecord: 6.5ms | Allocations: 5565)
+
+
+Started POST "/users?user[name]=Dato&user[email]=randomemail.gmail.com" for ::1 at 2022-12-15 00:53:52 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Dato", "email"=>"randomemail.gmail.com"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Dato"], ["email", "randomemail.gmail.com"], ["created_at", "2022-12-15 05:53:52.852118"], ["updated_at", "2022-12-15 05:53:52.852118"]]
+  ↳ app/controllers/users_controller.rb:24:in `create'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:24:in `create'
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 2.7ms | Allocations: 2189)
+
+
+Started GET "/users/3" for ::1 at 2022-12-15 00:54:28 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:12:in `show'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 1673)
+
+
+Started PATCH "/users/3?user[name]=Mlkz" for ::1 at 2022-12-15 00:55:36 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"name"=>"Mlkz"}, "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:36:in `update'
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "name" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["name", "Mlkz"], ["updated_at", "2022-12-15 05:55:36.345177"], ["id", 3]]
+  ↳ app/controllers/users_controller.rb:36:in `update'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:36:in `update'
+Completed 200 OK in 40ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 110048)
+
+
+Started GET "/users" for ::1 at 2022-12-15 00:55:43 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.3ms | Allocations: 1080)
+
+
+Started DELETE "/users/5" for ::1 at 2022-12-15 00:59:46 -0500
+Processing by UsersController#destroy as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"5"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:47:in `destroy'
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 5]]
+  ↳ app/controllers/users_controller.rb:47:in `destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:47:in `destroy'
+No template found for UsersController#destroy, rendering head :no_content
+Completed 204 No Content in 9ms (ActiveRecord: 4.8ms | Allocations: 5578)
+
+
+Started GET "/users" for ::1 at 2022-12-15 01:00:03 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 5ms (Views: 2.6ms | ActiveRecord: 1.9ms | Allocations: 1091)
+
+
+Started GET "/users/3" for ::1 at 2022-12-15 09:34:58 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 19ms (Views: 0.4ms | ActiveRecord: 7.2ms | Allocations: 6786)
+
+
+Started GET "/users/1" for ::1 at 2022-12-15 09:35:08 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"1"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 1.9ms | Allocations: 636)
+
+
+Started POST "/users?user[name]=Yeeun&user[email]=randomemail.gmail.com" for ::1 at 2022-12-15 09:35:55 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Yeeun", "email"=>"randomemail.gmail.com"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Create (2.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Yeeun"], ["email", "randomemail.gmail.com"], ["created_at", "2022-12-15 14:35:55.300643"], ["updated_at", "2022-12-15 14:35:55.300643"]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 4.0ms | Allocations: 2122)
+
+
+Started GET "/users" for ::1 at 2022-12-15 09:36:01 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 7ms (Views: 4.1ms | ActiveRecord: 2.5ms | Allocations: 1081)
+
+
+Started PATCH "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:37:04 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `update'
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x0000000108d24ac0>, params: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "controller"=>"users", "action"=>"update", "id"=>"6"} }[0m
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 860)
+
+
+Started GET "/users" for ::1 at 2022-12-15 09:37:16 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 24ms (Views: 23.1ms | ActiveRecord: 0.3ms | Allocations: 1054)
+
+
+Started GET "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:37:27 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 635)
+
+
+Started GET "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:37:28 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 0.6ms | Allocations: 635)
+
+
+Started GET "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:37:29 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.3ms | Allocations: 635)
+
+
+Started GET "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:37:29 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.8ms | Allocations: 635)
+
+
+Started PATCH "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:37:38 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `update'
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x0000000107cf0f00>, params: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "controller"=>"users", "action"=>"update", "id"=>"6"} }[0m
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 826)
+
+
+Started PATCH "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:37:39 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `update'
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x0000000107e120a0>, params: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "controller"=>"users", "action"=>"update", "id"=>"6"} }[0m
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 827)
+
+
+Started GET "/users" for ::1 at 2022-12-15 09:37:47 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 3.7ms | ActiveRecord: 0.5ms | Allocations: 1053)
+
+
+Started PATCH "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:38:21 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `update'
+[31mUnpermitted parameter: :email. Context: { controller: UsersController, action: update, request: #<ActionDispatch::Request:0x0000000108c4afc8>, params: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "controller"=>"users", "action"=>"update", "id"=>"6"} }[0m
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 8.3ms | Allocations: 9593)
+
+
+Started PATCH "/users/6?user[email]=newemail@gmail.com" for ::1 at 2022-12-15 09:39:22 -0500
+Processing by UsersController#update as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "user"=>{"email"=>"newemail@gmail.com"}, "id"=>"6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE "users" SET "email" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["email", "newemail@gmail.com"], ["updated_at", "2022-12-15 14:39:22.384866"], ["id", 6]]
+  ↳ app/controllers/users_controller.rb:31:in `update'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:31:in `update'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 8.5ms | Allocations: 7090)
+
+
+Started GET "/users" for ::1 at 2022-12-15 09:39:29 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.3ms | Allocations: 1255)
+
+
+Started GET "/users" for ::1 at 2022-12-15 09:39:47 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.4ms | Allocations: 1064)
+
+
+Started DELETE "/users/3" for ::1 at 2022-12-15 09:39:57 -0500
+Processing by UsersController#destroy as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:40:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:43:in `destroy'
+  [1m[36mUser Destroy (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/users_controller.rb:43:in `destroy'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:43:in `destroy'
+No template found for UsersController#destroy, rendering head :no_content
+Completed 204 No Content in 8ms (ActiveRecord: 1.1ms | Allocations: 2632)
+
+
+Started GET "/users" for ::1 at 2022-12-15 09:40:02 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 5ms (Views: 3.8ms | ActiveRecord: 1.3ms | Allocations: 1112)
+
+
+Started GET "/users/10" for ::1 at 2022-12-15 09:42:36 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"10"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 404 Not Found in 5ms (ActiveRecord: 0.6ms | Allocations: 1099)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=10:
+  app/controllers/users_controller.rb:8:in `show'
+
+Started GET "/users" for ::1 at 2022-12-15 09:42:43 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.3ms | Allocations: 960)
+
+
+Started GET "/users/10" for ::1 at 2022-12-15 09:45:19 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"10"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 404 Not Found in 6ms (ActiveRecord: 3.9ms | Allocations: 3199)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=10:
+  app/controllers/users_controller.rb:8:in `show'
+
+Started GET "/users/10//__better_errors" for ::1 at 2022-12-15 09:45:37 -0500
+Started GET "/users/1" for ::1 at 2022-12-15 09:46:14 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+  Rendering text template
+  Rendered text template (Duration: 0.0ms | Allocations: 13)
+Completed 200 OK in 16ms (Views: 3.0ms | ActiveRecord: 8.0ms | Allocations: 5045)
+
+
+Started GET "/users/1" for ::1 at 2022-12-15 09:46:33 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 5.2ms | Allocations: 3891)
+
+
+Started GET "/users/10" for ::1 at 2022-12-15 09:48:38 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"10"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 404 Not Found in 7ms (ActiveRecord: 3.8ms | Allocations: 3196)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=10:
+  app/controllers/users_controller.rb:8:in `show'
+
+Started GET "/users/1" for ::1 at 2022-12-15 09:48:44 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 119948ms (Views: 5.9ms | ActiveRecord: 0.2ms | Allocations: 158573)
+
+
+Started GET "/users/1" for ::1 at 2022-12-15 09:50:54 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 77394ms (Views: 1.4ms | ActiveRecord: 0.2ms | Allocations: 123682)
+
+
+Started GET "/users/3" for ::1 at 2022-12-15 09:52:14 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 404 Not Found in 6ms (ActiveRecord: 3.4ms | Allocations: 3196)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=3:
+  app/controllers/users_controller.rb:8:in `show'
+
+Started GET "/users/2" for ::1 at 2022-12-15 09:52:19 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 404 Not Found in 11ms (ActiveRecord: 0.2ms | Allocations: 1032)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=2:
+  app/controllers/users_controller.rb:8:in `show'
+
+Started GET "/users/1" for ::1 at 2022-12-15 09:52:23 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 22837ms (Views: 1.3ms | ActiveRecord: 0.5ms | Allocations: 113779)
+
+
+Started GET "/users/2" for ::1 at 2022-12-15 09:52:45 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 404 Not Found in 2ms (ActiveRecord: 0.2ms | Allocations: 1031)
+
+
+
+ActiveRecord::RecordNotFound - Couldn't find User with 'id'=2:
+  app/controllers/users_controller.rb:8:in `show'
+
+Started GET "/users" for ::1 at 2022-12-15 09:53:12 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 10ms (Views: 3.7ms | ActiveRecord: 4.8ms | Allocations: 6390)
+
+
+Started GET "/users/4" for ::1 at 2022-12-15 09:53:29 -0500
+Processing by UsersController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:8:in `show'
+Completed 200 OK in 180387ms (Views: 1.6ms | ActiveRecord: 0.4ms | Allocations: 165153)
+
+
