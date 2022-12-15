@@ -1317,3 +1317,208 @@ Processing by UsersController#show as */*
 Completed 200 OK in 180387ms (Views: 1.6ms | ActiveRecord: 0.4ms | Allocations: 165153)
 
 
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6058006232906588730)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to ChangeUser (20221215152117)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.5ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "email"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(6058006232906588730)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6058006232906588730)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to ChangeUser (20221215152117)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "email"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" RENAME COLUMN "name" TO "username"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_username" ON "users" ("username")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ALTER COLUMN "username" SET NOT NULL[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20221215152117"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6058006232906588730)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/users" for ::1 at 2022-12-15 10:36:24 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 10ms (Views: 3.7ms | ActiveRecord: 4.9ms | Allocations: 5910)
+
+
+Started POST "/users?user[name]=Dato&user[email]=randomemail.gmail.com" for ::1 at 2022-12-15 10:36:48 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Dato", "email"=>"randomemail.gmail.com"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 1398)
+
+
+
+ActiveModel::UnknownAttributeError - unknown attribute 'name' for User.
+          raise UnknownAttributeError.new(self, k.to_s)
+          ^^^^^:
+  app/controllers/users_controller.rb:18:in `create'
+
+Started POST "/users?user[name]=Dato" for ::1 at 2022-12-15 10:36:57 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Dato"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 1054)
+
+
+
+ActiveModel::UnknownAttributeError - unknown attribute 'name' for User.
+          raise UnknownAttributeError.new(self, k.to_s)
+          ^^^^^:
+  app/controllers/users_controller.rb:18:in `create'
+
+Started POST "/users?user[username]=Dato" for ::1 at 2022-12-15 10:37:07 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Dato"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0000000106dd8068>, params: {"user"=>{"username"=>"Dato"}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 23ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 7058)
+
+
+Started POST "/users?user[username]=" for ::1 at 2022-12-15 10:37:31 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>""}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0000000106e8b258>, params: {"user"=>{"username"=>""}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 7ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 3170)
+
+
+Started POST "/users?user[username]=" for ::1 at 2022-12-15 10:37:36 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>""}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0000000106eda1c8>, params: {"user"=>{"username"=>""}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (2.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 10ms (Views: 0.3ms | ActiveRecord: 2.6ms | Allocations: 3076)
+
+
+Started POST "/users?user[username]=Yen" for ::1 at 2022-12-15 10:37:49 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Yen"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0000000106f2a380>, params: {"user"=>{"username"=>"Yen"}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 6ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 3076)
+
+
+Started POST "/users?user[username]=Yen" for ::1 at 2022-12-15 10:37:50 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Yen"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0000000106f7aab0>, params: {"user"=>{"username"=>"Yen"}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 7ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 3067)
+
+
+Started POST "/users?user[username]=Yen" for ::1 at 2022-12-15 10:37:50 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Yen"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0000000106fcb2d0>, params: {"user"=>{"username"=>"Yen"}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 7ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 3068)
+
+
+Started POST "/users?user[username]=Daaa" for ::1 at 2022-12-15 10:37:57 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Daaa"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x000000010701b8e8>, params: {"user"=>{"username"=>"Daaa"}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 14ms (Views: 0.3ms | ActiveRecord: 0.9ms | Allocations: 3065)
+
+
+Started POST "/users?user[username]=Daaa" for ::1 at 2022-12-15 10:38:20 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Daaa"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x0000000107068dc8>, params: {"user"=>{"username"=>"Daaa"}, "controller"=>"users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 3065)
+
+
+Started POST "/users?user[username]=Daaa" for ::1 at 2022-12-15 10:40:51 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Daaa"}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Daaa"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("username", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Daaa"], ["created_at", "2022-12-15 15:40:51.404311"], ["updated_at", "2022-12-15 15:40:51.404311"]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 200 OK in 17ms (Views: 0.1ms | ActiveRecord: 11.5ms | Allocations: 7308)
+
+
+Started POST "/users?user[username]=" for ::1 at 2022-12-15 10:40:57 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>""}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", ""], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 6ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 3091)
+
+
+Started GET "/users" for ::1 at 2022-12-15 10:41:06 -0500
+Processing by UsersController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.4ms | ActiveRecord: 0.3ms | Allocations: 1064)
+
+
+Started POST "/users?user[username]=Yen" for ::1 at 2022-12-15 10:41:16 -0500
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"username"=>"Yen"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Yen"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:20:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:20:in `create'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 3076)
+
+

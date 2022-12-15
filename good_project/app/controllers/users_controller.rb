@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user
-      @user.update(params.require(:user).permit(:email))
+      @user.update(params.require(:user).permit(:username))
 
       render json: @user
     else
@@ -49,6 +49,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:username)
   end
 end
