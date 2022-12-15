@@ -1,5 +1,4 @@
-require "debug"
-class UsersController < ApplicationController
+class ArtworksController < ApplicationController
   def index
     render json: Artwork.all
   end
@@ -28,7 +27,9 @@ class UsersController < ApplicationController
     @artwork = Artwork.find(params[:id])
 
     if @artwork
-      @artwork.update(params.require(:user).permit(:username))
+      @artwork.update(
+        params.require(:artwork).permit(:title, :img_url, :artist_id)
+      )
 
       render json: @artwork
     else
@@ -49,6 +50,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username)
+    params.require(:artwork).permit(:title, :img_url, :artist_id)
   end
 end
