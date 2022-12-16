@@ -1823,3 +1823,32 @@ Migrating to ChangeArtworkSharesAddIndex (20221215203409)
   [1m[36mArtwork Load (0.2ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
   [1m[36mArtworkShare Create (0.4ms)[0m  [1m[32mINSERT INTO "artwork_shares" ("artwork_id", "viewer_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["artwork_id", 4], ["viewer_id", 15], ["created_at", "2022-12-15 22:10:23.094948"], ["updated_at", "2022-12-15 22:10:23.094948"]]
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/artworks/" for ::1 at 2022-12-15 21:06:50 -0500
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/artworks"):
+  
+Started GET "/artworks/" for ::1 at 2022-12-15 21:08:27 -0500
+Processing by ArtworksController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mArtwork Load (1.5ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:3:in `index'
+Completed 200 OK in 20ms (Views: 5.4ms | ActiveRecord: 8.3ms | Allocations: 8907)
+
+
+Started GET "/artworks/3" for ::1 at 2022-12-15 21:08:51 -0500
+Processing by ArtworksController#show as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com", "id"=>"3"}
+  [1m[36mArtwork Load (0.4ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks" WHERE "artworks"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/artworks_controller.rb:7:in `show'
+Completed 200 OK in 10ms (Views: 1.6ms | ActiveRecord: 1.3ms | Allocations: 3776)
+
+
+Started GET "/artworks/" for ::1 at 2022-12-15 21:09:05 -0500
+Processing by ArtworksController#index as */*
+  Parameters: {"name"=>"Mlkz", "email"=>"maho.mamulashvili@gmail.com"}
+  [1m[36mArtwork Load (0.3ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  ↳ app/controllers/artworks_controller.rb:3:in `index'
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.3ms | Allocations: 1080)
+
+
